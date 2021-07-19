@@ -1,22 +1,26 @@
-var buttonEnter = document.getElementById("enter");
-var buttonDelete = document.getElementById("delete");
-var input = document.getElementById("userinput");
-var ul = document.querySelector("ul");
+const container = document.getElementById("container");
+const buttonEnter = document.getElementById("enter");
+const buttonDelete = document.getElementById("delete");
+const input = document.getElementById("userinput");
 
 function inputLength() {
 	return input.value.length;
 }
 
 function createListElement() {
-	var li = document.createElement("li");
-	li.appendChild(document.createTextNode(input.value + " | "));
-	li.addEventListener("click", toggleDoneWhenMouseClick);
+	const div = document.createElement("div");
+	
+	const p = document.createElement("p");
+	p.appendChild(document.createTextNode(input.value));
+	div.appendChild(p);
 
-	var buttonDelete = setupDeleteButton();
-	li.appendChild(buttonDelete);
+	const buttonDelete = setupDeleteButton();
+	div.appendChild(buttonDelete);
+
+	container.appendChild(div);
+
+	p.addEventListener("click", toggleDoneWhenMouseClick);
 	buttonDelete.addEventListener("click", deleteListAfterButtonClick);
-
-	ul.appendChild(li);
 
 	input.value = "";
 }
@@ -34,7 +38,7 @@ function addListAfterKeypress(event) {
 }
 
 function setupDeleteButton() {
-	let button = document.createElement("button");
+	const button = document.createElement("button");
 	button.id = "delete";
 	button.innerHTML = "Delete";
 
@@ -42,7 +46,7 @@ function setupDeleteButton() {
 }
 
 function deleteListAfterButtonClick(event) {
-	var li = event.target.parentElement
+	const li = event.target.parentElement
 	li.parentElement.removeChild(li)
 }
 
@@ -51,5 +55,4 @@ function toggleDoneWhenMouseClick(event) {
 }
 
 buttonEnter.addEventListener("click", addListAfterButtonClick);
-
 input.addEventListener("keypress", addListAfterKeypress);
