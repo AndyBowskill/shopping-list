@@ -3,11 +3,9 @@ const buttonEnter = document.getElementById("enter");
 const buttonDelete = document.getElementById("delete");
 const input = document.getElementById("userinput");
 
-function inputLength() {
-	return input.value.length;
-}
+const inputLength = () => input.value.length;
 
-function createListElement() {
+const createListElement = () => {
 	const div = document.createElement("div");
 	
 	const p = document.createElement("p");
@@ -25,34 +23,31 @@ function createListElement() {
 	input.value = "";
 }
 
-function addListAfterButtonClick() {
+const addListAfterButtonClick = () => {
 	if (inputLength() > 0) {
 		createListElement();
 	}
 }
 
-function addListAfterKeypress(event) {
+const addListAfterKeypress = (event) => {
 	if (inputLength() > 0 && event.keyCode === 13) {
 		createListElement();
 	}
 }
 
-function setupDeleteButton() {
+const setupDeleteButton = () => {
 	const button = document.createElement("button");
 	button.id = "delete";
 	button.innerHTML = "Delete";
-
-	return button
+	return button;
 }
 
-function deleteListAfterButtonClick(event) {
-	const li = event.target.parentElement
-	li.parentElement.removeChild(li)
+const deleteListAfterButtonClick = (event) => {
+	const li = event.target.parentElement;
+	li.parentElement.removeChild(li);
 }
 
-function toggleDoneWhenMouseClick(event) {
-	event.target.classList.toggle("done");
-}
+const toggleDoneWhenMouseClick = (event) => event.target.classList.toggle("done");
 
 buttonEnter.addEventListener("click", addListAfterButtonClick);
 input.addEventListener("keypress", addListAfterKeypress);
